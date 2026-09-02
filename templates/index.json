@@ -94,11 +94,11 @@
         "column4": {
           "type": "column",
           "settings": {
-            "image": "shopify://shop_images/pet-vitamins-supplements_b72a0095-b985-4f8c-a525-fb716afd772b.png",
-            "title": "Pet Vitamins & Supplements",
+            "image": "shopify://shop_images/black-teas-category.png",
+            "title": "Black Teas",
             "text": "",
             "link_label": "Click here",
-            "link": "shopify://collections/pet-vitamins-supplements"
+            "link": "shopify://collections/black-teas"
           }
         },
         "column5": {
