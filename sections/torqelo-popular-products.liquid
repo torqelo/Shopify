@@ -11,10 +11,14 @@
       {% if section.settings.show_view_all %}<a href="{{ featured_collection.url }}" class="link underlined-link">View all</a>{% endif %}
     </div>
     <ul class="grid product-grid grid--2-col-tablet-down grid--5-col-desktop" role="list">
-      {% for product in featured_collection.products limit: 5 %}
+      {% assign available_products_shown = 0 %}
+      {% for product in featured_collection.products %}
+        {% if product.available == false %}{% continue %}{% endif %}
+        {% if available_products_shown >= 5 %}{% break %}{% endif %}
         <li class="grid__item">
           {% render 'card-product', card_product: product, media_aspect_ratio: 'adapt', show_secondary_image: true, show_rating: true, quick_add: 'standard', section_id: section.id %}
         </li>
+        {% assign available_products_shown = available_products_shown | plus: 1 %}
       {% else %}
         {% for i in (1..5) %}<li class="grid__item"><div class="card-wrapper product-card-wrapper">{{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}</div></li>{% endfor %}
       {% endfor %}
