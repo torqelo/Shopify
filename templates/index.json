@@ -103,7 +103,6 @@
         },
         "column5": {
           "type": "column",
-          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/whipped-body-butter-category.png",
             "title": "Whipped Body Butter",
