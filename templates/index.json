@@ -12,18 +12,19 @@
     "image_banner": {
       "type": "image-banner",
       "blocks": {
+        "heading_HrAFWh": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "Discover everyday essentials for beauty, home, wellness and more.",
+            "heading_size": "h1"
+          }
+        },
         "text": {
           "type": "text",
           "settings": {
             "text": "Welcome To Torqelo.com",
-            "text_style": "body"
-          }
-        },
-        "heading_HrAFWh": {
-          "type": "heading",
-          "settings": {
-            "heading": "Discover everyday essentials for beauty, home, wellness and more.",
-            "heading_size": "h1"
+            "text_style": "subtitle"
           }
         },
         "button": {
@@ -39,8 +40,8 @@
         }
       },
       "block_order": [
-        "text",
         "heading_HrAFWh",
+        "text",
         "button"
       ],
       "settings": {
