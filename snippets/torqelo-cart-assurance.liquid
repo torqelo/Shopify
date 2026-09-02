@@ -1,0 +1,25 @@
+{% liquid
+  assign free_shipping_threshold = 7500
+  assign shipping_remaining = free_shipping_threshold | minus: cart.total_price
+  assign shipping_progress = cart.total_price | times: 100.0 | divided_by: free_shipping_threshold | at_most: 100
+%}
+<div class="torqelo-cart-assurance">
+  <div class="torqelo-cart-progress" aria-live="polite">
+    {% if shipping_remaining > 0 %}<p>You’re {{ shipping_remaining | money }} away from free standard shipping.</p>{% else %}<p>Free standard shipping unlocked.</p>{% endif %}
+    <div class="torqelo-cart-progress__track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ shipping_progress | round }}"><span style="width:{{ shipping_progress }}%"></span></div>
+  </div>
+  {% assign upsell_collection = collections['new-arrivals'] %}
+  {% if upsell_collection.products.size > 0 %}
+    <div class="torqelo-cart-upsells"><h3>Complete your order</h3>
+      {% assign shown = 0 %}
+      {% for upsell_product in upsell_collection.products %}
+        {% assign already_in_cart = false %}{% for cart_item in cart.items %}{% if cart_item.product_id == upsell_product.id %}{% assign already_in_cart = true %}{% endif %}{% endfor %}
+        {% if upsell_product.available and already_in_cart == false and shown < 2 %}
+          <div class="torqelo-cart-upsell">{% if upsell_product.featured_image %}{{ upsell_product.featured_image | image_url: width: 160 | image_tag: loading: 'lazy', widths: '80, 160', alt: upsell_product.featured_image.alt | default: upsell_product.title }}{% endif %}<div><a href="{{ upsell_product.url }}">{{ upsell_product.title }}</a><span>{{ upsell_product.price | money }}</span></div><form method="post" action="{{ routes.cart_add_url }}"><input type="hidden" name="id" value="{{ upsell_product.selected_or_first_available_variant.id }}"><button class="button button--secondary" type="submit" aria-label="Add {{ upsell_product.title | escape }} to cart">Add</button></form></div>
+          {% assign shown = shown | plus: 1 %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+  <p class="torqelo-cart-reassurance">Secure checkout · Clear delivery updates · Straightforward returns</p>
+</div>

@@ -694,6 +694,7 @@
               {{ 'products.product.view_full_details' | t }}
               {{- 'icon-arrow.svg' | inline_asset_content -}}
             </a>
+            {% render 'torqelo-product-assurance', product: product %}
           </section>
         </div>
       </div>
@@ -752,6 +753,11 @@
     </div>
   </product-component>
 </product-info>
+
+<section class="torqelo-recently-viewed page-width" data-recently-viewed-section data-limit="5" hidden>
+  <h2 class="title h2">Recently viewed</h2>
+  <div class="torqelo-recently-viewed__grid" data-recently-viewed-grid></div>
+</section>
 
 {% schema %}
 {

@@ -1,0 +1,7 @@
+{% if request.page_type == 'index' %}
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":{{ shop.name | json }},"url":{{ shop.url | json }}{% if settings.logo %},"logo":{{ settings.logo | image_url: width: 600 | prepend: 'https:' | json }}{% endif %}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":{{ shop.name | json }},"url":{{ shop.url | json }},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":{{ shop.url | append: routes.search_url | append: '?q={search_term_string}' | json }}},"query-input":"required name=search_term_string"}}</script>
+{% endif %}
+{% if request.page_type == 'product' or request.page_type == 'collection' or request.page_type == 'page' or request.page_type == 'article' %}
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":{{ shop.url | json }}},{"@type":"ListItem","position":2,"name":{{ page_title | json }},"item":{{ canonical_url | json }}}]}</script>
+{% endif %}
