@@ -469,6 +469,45 @@ details[open] > .header__menu-item {
 .quick-order-list { display: none !important; }
 .cart-drawer .drawer__inner { overflow-x: hidden; }
 
+/* Keep merchandising cards aligned even when supplier titles vary in length. */
+.product-card-wrapper .card__heading {
+  display: -webkit-box;
+  min-height: 4.2rem;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.product-card-wrapper .card__content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.product-card-wrapper .quick-add {
+  margin-top: auto;
+}
+
+/* Prevent wide navigation labels from forcing a second desktop row. */
+@media screen and (min-width: 990px) {
+  .header__inline-menu .list-menu--inline {
+    flex-wrap: nowrap;
+    column-gap: clamp(1.2rem, 1.7vw, 2.8rem);
+  }
+
+  .header__menu-item {
+    white-space: nowrap;
+  }
+}
+
+/* The policy list already appears in the footer menu, so keep the lower
+ * legal row and payment area compact. */
+.footer__content-top,
+.footer__content-bottom {
+  padding-top: 2.4rem;
+  padding-bottom: 2.4rem;
+}
+
 @media screen and (max-width: 989px) {
   .torqelo-trust__grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
   .torqelo-recently-viewed__grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
