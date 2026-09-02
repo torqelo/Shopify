@@ -13,7 +13,7 @@
     <ul class="grid product-grid grid--2-col-tablet-down grid--5-col-desktop" role="list">
       {% for product in featured_collection.products limit: 5 %}
         <li class="grid__item">
-          {% render 'card-product', card_product: product, media_aspect_ratio: 'adapt', show_secondary_image: true, show_rating: true, show_quick_add: true, section_id: section.id %}
+          {% render 'card-product', card_product: product, media_aspect_ratio: 'adapt', show_secondary_image: true, show_rating: true, quick_add: 'standard', section_id: section.id %}
         </li>
       {% else %}
         {% for i in (1..5) %}<li class="grid__item"><div class="card-wrapper product-card-wrapper">{{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}</div></li>{% endfor %}

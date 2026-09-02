@@ -456,6 +456,7 @@ details[open] > .header__menu-item {
 .torqelo-cart-upsell a,.torqelo-cart-upsell span { display: block; font-size: 1.2rem; line-height: 1.35; }
 .torqelo-cart-upsell .button { min-width: 0; min-height: 3.6rem; padding: 0 1.2rem; }
 .torqelo-cart-reassurance,.torqelo-cart-empty-copy { font-size: 1.2rem; color: rgba(24,21,28,.7); }
+.torqelo-recently-viewed { padding-top: 3.6rem; padding-bottom: 5.2rem; }
 .torqelo-recently-viewed__grid { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 1.6rem; }
 .torqelo-recent-card { overflow: hidden; border: .1rem solid var(--torqelo-border); border-radius: 1.4rem; background: var(--torqelo-white); }
 .torqelo-recent-card img { width: 100%; aspect-ratio: 1; object-fit: cover; }
