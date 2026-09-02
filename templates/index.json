@@ -19,10 +19,10 @@
             "text_style": "body"
           }
         },
-        "heading": {
+        "heading_HrAFWh": {
           "type": "heading",
           "settings": {
-            "heading": "",
+            "heading": "Discover everyday essentials for beauty, home, wellness and more.",
             "heading_size": "h1"
           }
         },
@@ -40,7 +40,7 @@
       },
       "block_order": [
         "text",
-        "heading",
+        "heading_HrAFWh",
         "button"
       ],
       "settings": {
