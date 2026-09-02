@@ -27,11 +27,6 @@
     {% endif %}
 
     {% render 'meta-tags' %}
-    {% render 'torqelo-seo' %}
-
-    {% if request.page_type == 'search' or request.page_type == 'cart' or request.page_type contains 'customers/' %}
-      <meta name="robots" content="noindex,follow">
-    {% endif %}
 
     <script type="module">
       import * as StandardEvents from 'https://cdn.shopify.com/storefront/standard-events.js';
@@ -407,6 +402,5 @@
     {%- if settings.cart_type == 'drawer' -%}
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
-    <script src="{{ 'torqelo-storefront.js' | asset_url }}" defer="defer"></script>
   </body>
 </html>
