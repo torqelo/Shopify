@@ -1,0 +1,1167 @@
+{% doc %}
+  @prompt
+    Create a premium, modern storefront with a deep purple-indigo-lavender color palette and glassmorphism aesthetic. Use these brand colors: Deep Plum #382A3D, Dark Purple #543C61, Deep Indigo #3A3982, Rich Violet #655898, Soft Lavender #7874AD, Light Lavender #9C86BE, Soft Blue-Lavender #94ADD9, Off-White #EBEBED, Primary Accent Purple #735FC4, Bright Blue #4F8FE8. Design features: floating translucent navigation bar with backdrop blur and rounded corners; immersive radial gradient background blending plum, purple, indigo, and lavender; glassmorphism cards with semi-transparent dark purple backgrounds, 16-24px rounded corners, soft shadows, and subtle white borders; primary buttons with purple-to-blue gradient (#735FC4 → #4F8FE8) with glow on hover; clean modern sans-serif typography in white and light lavender; subtle premium animations including hover transitions, card elevation, and fade-in sections; fully responsive across mobile, tablet, and desktop. The overall feel should be futuristic, high-end, dimensional, and Apple-inspired without copying Apple — like a next-generation premium e-commerce brand.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-glassmorphism-hero-{{ ai_gen_id }} {
+    display: block;
+    position: relative;
+    width: 100%;
+    min-height: {{ block.settings.section_height }}px;
+    overflow: hidden;
+    background: radial-gradient(
+      ellipse at {{ block.settings.gradient_position }},
+      {{ block.settings.gradient_color_1 }} 0%,
+      {{ block.settings.gradient_color_2 }} 25%,
+      {{ block.settings.gradient_color_3 }} 50%,
+      {{ block.settings.gradient_color_4 }} 75%,
+      {{ block.settings.gradient_color_5 }} 100%
+    );
+  }
+
+  .ai-glassmorphism-hero__nav-{{ ai_gen_id }} {
+    position: absolute;
+    top: {{ block.settings.nav_top_spacing }}px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - {{ block.settings.nav_horizontal_margin }}px);
+    max-width: {{ block.settings.nav_max_width }}px;
+    background: {{ block.settings.nav_bg_color }};
+    backdrop-filter: blur({{ block.settings.nav_blur }}px);
+    border-radius: {{ block.settings.nav_border_radius }}px;
+    border: {{ block.settings.nav_border_width }}px solid {{ block.settings.nav_border_color }};
+    box-shadow: 0 {{ block.settings.nav_shadow_y }}px {{ block.settings.nav_shadow_blur }}px {{ block.settings.nav_shadow_color }};
+    padding: {{ block.settings.nav_padding_vertical }}px {{ block.settings.nav_padding_horizontal }}px;
+    z-index: 100;
+    transition: all 0.3s ease;
+  }
+
+  .ai-glassmorphism-hero__nav-content-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .ai-glassmorphism-hero__logo-{{ ai_gen_id }} {
+    font-size: {{ block.settings.logo_size }}px;
+    font-weight: 700;
+    color: {{ block.settings.nav_text_color }};
+    text-decoration: none;
+    letter-spacing: -0.5px;
+  }
+
+  .ai-glassmorphism-hero__nav-links-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.nav_link_spacing }}px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .ai-glassmorphism-hero__nav-link-{{ ai_gen_id }} {
+    color: {{ block.settings.nav_text_color }};
+    text-decoration: none;
+    font-size: {{ block.settings.nav_link_size }}px;
+    font-weight: 500;
+    transition: color 0.3s ease, transform 0.3s ease;
+    opacity: 0.9;
+  }
+
+  .ai-glassmorphism-hero__nav-link-{{ ai_gen_id }}:hover {
+    color: {{ block.settings.nav_link_hover_color }};
+    opacity: 1;
+    transform: translateY(-1px);
+  }
+
+  .ai-glassmorphism-hero__content-{{ ai_gen_id }} {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: {{ block.settings.section_height }}px;
+    padding: {{ block.settings.content_padding_top }}px {{ block.settings.content_padding_horizontal }}px {{ block.settings.content_padding_bottom }}px;
+    text-align: center;
+    z-index: 10;
+  }
+
+  .ai-glassmorphism-hero__card-{{ ai_gen_id }} {
+    background: {{ block.settings.card_bg_color }};
+    backdrop-filter: blur({{ block.settings.card_blur }}px);
+    border-radius: {{ block.settings.card_border_radius }}px;
+    border: {{ block.settings.card_border_width }}px solid {{ block.settings.card_border_color }};
+    box-shadow: 0 {{ block.settings.card_shadow_y }}px {{ block.settings.card_shadow_blur }}px {{ block.settings.card_shadow_color }};
+    padding: {{ block.settings.card_padding }}px;
+    max-width: {{ block.settings.card_max_width }}px;
+    width: 100%;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .ai-glassmorphism-hero__card-{{ ai_gen_id }}:hover {
+    transform: translateY(-{{ block.settings.card_hover_lift }}px);
+    box-shadow: 0 {{ block.settings.card_hover_shadow_y }}px {{ block.settings.card_hover_shadow_blur }}px {{ block.settings.card_hover_shadow_color }};
+  }
+
+  .ai-glassmorphism-hero__heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_size }}px;
+    font-weight: 700;
+    color: {{ block.settings.heading_color }};
+    margin: 0 0 {{ block.settings.heading_margin_bottom }}px;
+    line-height: 1.2;
+    letter-spacing: -1px;
+  }
+
+  .ai-glassmorphism-hero__subheading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subheading_size }}px;
+    font-weight: 400;
+    color: {{ block.settings.subheading_color }};
+    margin: 0 0 {{ block.settings.subheading_margin_bottom }}px;
+    line-height: 1.6;
+    opacity: 0.95;
+  }
+
+  .ai-glassmorphism-hero__button-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: {{ block.settings.button_padding_vertical }}px {{ block.settings.button_padding_horizontal }}px;
+    background: linear-gradient(135deg, {{ block.settings.button_gradient_start }} 0%, {{ block.settings.button_gradient_end }} 100%);
+    color: {{ block.settings.button_text_color }};
+    text-decoration: none;
+    font-size: {{ block.settings.button_font_size }}px;
+    font-weight: 600;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(115, 95, 196, 0.3);
+  }
+
+  .ai-glassmorphism-hero__button-{{ ai_gen_id }}:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(115, 95, 196, 0.5), 0 0 30px rgba(115, 95, 196, 0.4);
+  }
+
+  .ai-glassmorphism-hero__features-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: {{ block.settings.feature_gap }}px;
+    margin-top: {{ block.settings.features_margin_top }}px;
+    padding: 0 {{ block.settings.content_padding_horizontal }}px;
+    max-width: {{ block.settings.features_max_width }}px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .ai-glassmorphism-hero__feature-card-{{ ai_gen_id }} {
+    background: {{ block.settings.feature_card_bg }};
+    backdrop-filter: blur({{ block.settings.feature_card_blur }}px);
+    border-radius: {{ block.settings.feature_card_radius }}px;
+    border: {{ block.settings.feature_card_border_width }}px solid {{ block.settings.feature_card_border_color }};
+    padding: {{ block.settings.feature_card_padding }}px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .ai-glassmorphism-hero__feature-card-{{ ai_gen_id }}:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(115, 95, 196, 0.2);
+  }
+
+  .ai-glassmorphism-hero__feature-icon-{{ ai_gen_id }} {
+    width: {{ block.settings.feature_icon_size }}px;
+    height: {{ block.settings.feature_icon_size }}px;
+    margin: 0 auto {{ block.settings.feature_icon_margin }}px;
+    background: linear-gradient(135deg, {{ block.settings.button_gradient_start }} 0%, {{ block.settings.button_gradient_end }} 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: {{ block.settings.button_text_color }};
+  }
+
+  .ai-glassmorphism-hero__feature-icon-{{ ai_gen_id }} svg {
+    width: calc({{ block.settings.feature_icon_size }}px * 0.5);
+    height: calc({{ block.settings.feature_icon_size }}px * 0.5);
+  }
+
+  .ai-glassmorphism-hero__feature-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.feature_title_size }}px;
+    font-weight: 600;
+    color: {{ block.settings.heading_color }};
+    margin: 0 0 8px;
+  }
+
+  .ai-glassmorphism-hero__feature-text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.feature_text_size }}px;
+    color: {{ block.settings.subheading_color }};
+    margin: 0;
+    line-height: 1.5;
+    opacity: 0.9;
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-glassmorphism-hero-{{ ai_gen_id }} {
+      min-height: {{ block.settings.section_height | times: 0.8 }}px;
+    }
+
+    .ai-glassmorphism-hero__content-{{ ai_gen_id }} {
+      min-height: {{ block.settings.section_height | times: 0.8 }}px;
+      padding: {{ block.settings.content_padding_top | times: 0.8 }}px 24px {{ block.settings.content_padding_bottom | times: 0.8 }}px;
+    }
+
+    .ai-glassmorphism-hero__heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size | times: 0.7 }}px;
+    }
+
+    .ai-glassmorphism-hero__subheading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.subheading_size | times: 0.9 }}px;
+    }
+
+    .ai-glassmorphism-hero__nav-links-{{ ai_gen_id }} {
+      display: none;
+    }
+
+    .ai-glassmorphism-hero__features-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      padding: 0 20px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-glassmorphism-hero__card-{{ ai_gen_id }} {
+      padding: {{ block.settings.card_padding | times: 0.7 }}px;
+    }
+
+    .ai-glassmorphism-hero__nav-{{ ai_gen_id }} {
+      width: calc(100% - 32px);
+    }
+  }
+{% endstyle %}
+
+<glassmorphism-hero-{{ ai_gen_id }} class="ai-glassmorphism-hero-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  {% if block.settings.show_navigation %}
+    <nav class="ai-glassmorphism-hero__nav-{{ ai_gen_id }}">
+      <div class="ai-glassmorphism-hero__nav-content-{{ ai_gen_id }}">
+        <a href="{{ block.settings.logo_link }}" class="ai-glassmorphism-hero__logo-{{ ai_gen_id }}">
+          {{ block.settings.logo_text }}
+        </a>
+        <ul class="ai-glassmorphism-hero__nav-links-{{ ai_gen_id }}">
+          {% if block.settings.nav_link_1_text != blank %}
+            <li>
+              <a href="{{ block.settings.nav_link_1_url }}" class="ai-glassmorphism-hero__nav-link-{{ ai_gen_id }}">
+                {{ block.settings.nav_link_1_text }}
+              </a>
+            </li>
+          {% endif %}
+          {% if block.settings.nav_link_2_text != blank %}
+            <li>
+              <a href="{{ block.settings.nav_link_2_url }}" class="ai-glassmorphism-hero__nav-link-{{ ai_gen_id }}">
+                {{ block.settings.nav_link_2_text }}
+              </a>
+            </li>
+          {% endif %}
+          {% if block.settings.nav_link_3_text != blank %}
+            <li>
+              <a href="{{ block.settings.nav_link_3_url }}" class="ai-glassmorphism-hero__nav-link-{{ ai_gen_id }}">
+                {{ block.settings.nav_link_3_text }}
+              </a>
+            </li>
+          {% endif %}
+          {% if block.settings.nav_link_4_text != blank %}
+            <li>
+              <a href="{{ block.settings.nav_link_4_url }}" class="ai-glassmorphism-hero__nav-link-{{ ai_gen_id }}">
+                {{ block.settings.nav_link_4_text }}
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+  {% endif %}
+
+  <div class="ai-glassmorphism-hero__content-{{ ai_gen_id }}">
+    <div class="ai-glassmorphism-hero__card-{{ ai_gen_id }}">
+      {% if block.settings.heading != blank %}
+        <h1 class="ai-glassmorphism-hero__heading-{{ ai_gen_id }}">
+          {{ block.settings.heading }}
+        </h1>
+      {% endif %}
+
+      {% if block.settings.subheading != blank %}
+        <p class="ai-glassmorphism-hero__subheading-{{ ai_gen_id }}">
+          {{ block.settings.subheading }}
+        </p>
+      {% endif %}
+
+      {% if block.settings.button_text != blank %}
+        <a href="{{ block.settings.button_link }}" class="ai-glassmorphism-hero__button-{{ ai_gen_id }}">
+          {{ block.settings.button_text }}
+        </a>
+      {% endif %}
+    </div>
+
+    {% if block.settings.show_features %}
+      <div class="ai-glassmorphism-hero__features-{{ ai_gen_id }}">
+        {% if block.settings.feature_1_title != blank %}
+          <div class="ai-glassmorphism-hero__feature-card-{{ ai_gen_id }}">
+            <div class="ai-glassmorphism-hero__feature-icon-{{ ai_gen_id }}">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <h3 class="ai-glassmorphism-hero__feature-title-{{ ai_gen_id }}">
+              {{ block.settings.feature_1_title }}
+            </h3>
+            <p class="ai-glassmorphism-hero__feature-text-{{ ai_gen_id }}">
+              {{ block.settings.feature_1_text }}
+            </p>
+          </div>
+        {% endif %}
+
+        {% if block.settings.feature_2_title != blank %}
+          <div class="ai-glassmorphism-hero__feature-card-{{ ai_gen_id }}">
+            <div class="ai-glassmorphism-hero__feature-icon-{{ ai_gen_id }}">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+              </svg>
+            </div>
+            <h3 class="ai-glassmorphism-hero__feature-title-{{ ai_gen_id }}">
+              {{ block.settings.feature_2_title }}
+            </h3>
+            <p class="ai-glassmorphism-hero__feature-text-{{ ai_gen_id }}">
+              {{ block.settings.feature_2_text }}
+            </p>
+          </div>
+        {% endif %}
+
+        {% if block.settings.feature_3_title != blank %}
+          <div class="ai-glassmorphism-hero__feature-card-{{ ai_gen_id }}">
+            <div class="ai-glassmorphism-hero__feature-icon-{{ ai_gen_id }}">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </div>
+            <h3 class="ai-glassmorphism-hero__feature-title-{{ ai_gen_id }}">
+              {{ block.settings.feature_3_title }}
+            </h3>
+            <p class="ai-glassmorphism-hero__feature-text-{{ ai_gen_id }}">
+              {{ block.settings.feature_3_text }}
+            </p>
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</glassmorphism-hero-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class GlassmorphismHero{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.setupScrollEffect();
+      }
+
+      setupScrollEffect() {
+        const nav = this.querySelector('.ai-glassmorphism-hero__nav-{{ ai_gen_id }}');
+        if (!nav) return;
+
+        let lastScroll = 0;
+        
+        window.addEventListener('scroll', () => {
+          const currentScroll = window.pageYOffset;
+          
+          if (currentScroll > lastScroll && currentScroll > 100) {
+            nav.style.transform = 'translateX(-50%) translateY(-100%)';
+            nav.style.opacity = '0';
+          } else {
+            nav.style.transform = 'translateX(-50%) translateY(0)';
+            nav.style.opacity = '1';
+          }
+          
+          lastScroll = currentScroll;
+        });
+      }
+    }
+
+    customElements.define('glassmorphism-hero-{{ ai_gen_id }}', GlassmorphismHero{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Glassmorphism hero",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "section_height",
+      "label": "Section height",
+      "min": 400,
+      "max": 1000,
+      "step": 50,
+      "unit": "px",
+      "default": 700
+    },
+    {
+      "type": "header",
+      "content": "Background gradient"
+    },
+    {
+      "type": "select",
+      "id": "gradient_position",
+      "label": "Gradient position",
+      "options": [
+        { "value": "top left", "label": "Top left" },
+        { "value": "top center", "label": "Top center" },
+        { "value": "top right", "label": "Top right" },
+        { "value": "center left", "label": "Center left" },
+        { "value": "center center", "label": "Center" },
+        { "value": "center right", "label": "Center right" },
+        { "value": "bottom left", "label": "Bottom left" },
+        { "value": "bottom center", "label": "Bottom center" },
+        { "value": "bottom right", "label": "Bottom right" }
+      ],
+      "default": "center center"
+    },
+    {
+      "type": "color",
+      "id": "gradient_color_1",
+      "label": "Gradient color 1",
+      "default": "#382A3D"
+    },
+    {
+      "type": "color",
+      "id": "gradient_color_2",
+      "label": "Gradient color 2",
+      "default": "#543C61"
+    },
+    {
+      "type": "color",
+      "id": "gradient_color_3",
+      "label": "Gradient color 3",
+      "default": "#3A3982"
+    },
+    {
+      "type": "color",
+      "id": "gradient_color_4",
+      "label": "Gradient color 4",
+      "default": "#655898"
+    },
+    {
+      "type": "color",
+      "id": "gradient_color_5",
+      "label": "Gradient color 5",
+      "default": "#7874AD"
+    },
+    {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_navigation",
+      "label": "Show navigation",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo text",
+      "default": "LUXE"
+    },
+    {
+      "type": "url",
+      "id": "logo_link",
+      "label": "Logo link"
+    },
+    {
+      "type": "range",
+      "id": "logo_size",
+      "label": "Logo size",
+      "min": 16,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "text",
+      "id": "nav_link_1_text",
+      "label": "Link 1 text",
+      "default": "Shop"
+    },
+    {
+      "type": "url",
+      "id": "nav_link_1_url",
+      "label": "Link 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "nav_link_2_text",
+      "label": "Link 2 text",
+      "default": "Collections"
+    },
+    {
+      "type": "url",
+      "id": "nav_link_2_url",
+      "label": "Link 2 URL"
+    },
+    {
+      "type": "text",
+      "id": "nav_link_3_text",
+      "label": "Link 3 text",
+      "default": "About"
+    },
+    {
+      "type": "url",
+      "id": "nav_link_3_url",
+      "label": "Link 3 URL"
+    },
+    {
+      "type": "text",
+      "id": "nav_link_4_text",
+      "label": "Link 4 text",
+      "default": "Contact"
+    },
+    {
+      "type": "url",
+      "id": "nav_link_4_url",
+      "label": "Link 4 URL"
+    },
+    {
+      "type": "range",
+      "id": "nav_link_size",
+      "label": "Link size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "nav_link_spacing",
+      "label": "Link spacing",
+      "min": 16,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "color",
+      "id": "nav_text_color",
+      "label": "Text color",
+      "default": "#EBEBED"
+    },
+    {
+      "type": "color",
+      "id": "nav_link_hover_color",
+      "label": "Link hover color",
+      "default": "#94ADD9"
+    },
+    {
+      "type": "color",
+      "id": "nav_bg_color",
+      "label": "Background color",
+      "default": "rgba(84, 60, 97, 0.3)"
+    },
+    {
+      "type": "color",
+      "id": "nav_border_color",
+      "label": "Border color",
+      "default": "rgba(235, 235, 237, 0.2)"
+    },
+    {
+      "type": "range",
+      "id": "nav_border_width",
+      "label": "Border width",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "nav_border_radius",
+      "label": "Border radius",
+      "min": 8,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "nav_blur",
+      "label": "Backdrop blur",
+      "min": 4,
+      "max": 32,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "nav_top_spacing",
+      "label": "Top spacing",
+      "min": 16,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "nav_horizontal_margin",
+      "label": "Horizontal margin",
+      "min": 32,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "nav_max_width",
+      "label": "Max width",
+      "min": 800,
+      "max": 1400,
+      "step": 50,
+      "unit": "px",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "nav_padding_vertical",
+      "label": "Vertical padding",
+      "min": 8,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "nav_padding_horizontal",
+      "label": "Horizontal padding",
+      "min": 16,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "color",
+      "id": "nav_shadow_color",
+      "label": "Shadow color",
+      "default": "rgba(0, 0, 0, 0.1)"
+    },
+    {
+      "type": "range",
+      "id": "nav_shadow_y",
+      "label": "Shadow Y offset",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "nav_shadow_blur",
+      "label": "Shadow blur",
+      "min": 8,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Hero content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Experience Premium Design"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Discover our curated collection of modern, high-end products designed for those who appreciate exceptional quality and timeless elegance."
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 32,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "label": "Subheading size",
+      "min": 14,
+      "max": 28,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#EBEBED"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading color",
+      "default": "#9C86BE"
+    },
+    {
+      "type": "range",
+      "id": "heading_margin_bottom",
+      "label": "Heading bottom margin",
+      "min": 12,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "subheading_margin_bottom",
+      "label": "Subheading margin",
+      "min": 20,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "content_padding_top",
+      "label": "Content top padding",
+      "min": 80,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 140
+    },
+    {
+      "type": "range",
+      "id": "content_padding_bottom",
+      "label": "Content bottom padding",
+      "min": 40,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "content_padding_horizontal",
+      "label": "Horizontal padding",
+      "min": 20,
+      "max": 80,
+      "step": 10,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Glassmorphism card"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Background color",
+      "default": "rgba(84, 60, 97, 0.25)"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Border color",
+      "default": "rgba(235, 235, 237, 0.15)"
+    },
+    {
+      "type": "range",
+      "id": "card_border_width",
+      "label": "Border width",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Border radius",
+      "min": 12,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "card_blur",
+      "label": "Backdrop blur",
+      "min": 8,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "label": "Padding",
+      "min": 32,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "card_max_width",
+      "label": "Max width",
+      "min": 500,
+      "max": 1000,
+      "step": 50,
+      "unit": "px",
+      "default": 800
+    },
+    {
+      "type": "color",
+      "id": "card_shadow_color",
+      "label": "Shadow color",
+      "default": "rgba(0, 0, 0, 0.2)"
+    },
+    {
+      "type": "range",
+      "id": "card_shadow_y",
+      "label": "Shadow Y offset",
+      "min": 4,
+      "max": 32,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "card_shadow_blur",
+      "label": "Shadow blur",
+      "min": 16,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "card_hover_lift",
+      "label": "Hover lift",
+      "min": 4,
+      "max": 16,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "color",
+      "id": "card_hover_shadow_color",
+      "label": "Hover shadow color",
+      "default": "rgba(115, 95, 196, 0.3)"
+    },
+    {
+      "type": "range",
+      "id": "card_hover_shadow_y",
+      "label": "Hover shadow Y",
+      "min": 8,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "card_hover_shadow_blur",
+      "label": "Hover shadow blur",
+      "min": 24,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Explore Collection"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "color",
+      "id": "button_gradient_start",
+      "label": "Gradient start",
+      "default": "#735FC4"
+    },
+    {
+      "type": "color",
+      "id": "button_gradient_end",
+      "label": "Gradient end",
+      "default": "#4F8FE8"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Font size",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical",
+      "label": "Vertical padding",
+      "min": 12,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal",
+      "label": "Horizontal padding",
+      "min": 24,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Border radius",
+      "min": 4,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Feature cards"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_features",
+      "label": "Show feature cards",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "feature_1_title",
+      "label": "Feature 1 title",
+      "default": "Fast Delivery"
+    },
+    {
+      "type": "text",
+      "id": "feature_1_text",
+      "label": "Feature 1 text",
+      "default": "Express shipping on all orders"
+    },
+    {
+      "type": "text",
+      "id": "feature_2_title",
+      "label": "Feature 2 title",
+      "default": "Premium Quality"
+    },
+    {
+      "type": "text",
+      "id": "feature_2_text",
+      "label": "Feature 2 text",
+      "default": "Handcrafted with attention to detail"
+    },
+    {
+      "type": "text",
+      "id": "feature_3_title",
+      "label": "Feature 3 title",
+      "default": "Secure Shopping"
+    },
+    {
+      "type": "text",
+      "id": "feature_3_text",
+      "label": "Feature 3 text",
+      "default": "Protected checkout and data privacy"
+    },
+    {
+      "type": "range",
+      "id": "features_margin_top",
+      "label": "Top margin",
+      "min": 40,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "features_max_width",
+      "label": "Max width",
+      "min": 800,
+      "max": 1400,
+      "step": 50,
+      "unit": "px",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "feature_gap",
+      "label": "Gap between cards",
+      "min": 16,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "color",
+      "id": "feature_card_bg",
+      "label": "Card background",
+      "default": "rgba(84, 60, 97, 0.2)"
+    },
+    {
+      "type": "color",
+      "id": "feature_card_border_color",
+      "label": "Card border color",
+      "default": "rgba(235, 235, 237, 0.1)"
+    },
+    {
+      "type": "range",
+      "id": "feature_card_border_width",
+      "label": "Card border width",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "feature_card_radius",
+      "label": "Card border radius",
+      "min": 8,
+      "max": 32,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "feature_card_blur",
+      "label": "Card backdrop blur",
+      "min": 4,
+      "max": 24,
+      "step": 4,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "feature_card_padding",
+      "label": "Card padding",
+      "min": 20,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "feature_icon_size",
+      "label": "Icon size",
+      "min": 40,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "feature_icon_margin",
+      "label": "Icon bottom margin",
+      "min": 12,
+      "max": 32,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "feature_title_size",
+      "label": "Title size",
+      "min": 16,
+      "max": 28,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "feature_text_size",
+      "label": "Text size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    }
+  ],
+  "presets": [
+    {
+      "name": "Glassmorphism hero"
+    }
+  ]
+}
+{% endschema %}
