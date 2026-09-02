@@ -113,12 +113,12 @@
         },
         "column6": {
           "type": "column",
-          "disabled": true,
           "settings": {
-            "title": "Insert partner logo",
+            "image": "shopify://shop_images/beauty-care-bag.png",
+            "title": "Beauty Care Bag",
             "text": "",
-            "link_label": "",
-            "link": ""
+            "link_label": "Beauty Care Bag",
+            "link": "shopify://collections/beauty-care-bag"
           }
         }
       },
