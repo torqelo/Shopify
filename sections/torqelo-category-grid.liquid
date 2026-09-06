@@ -1,0 +1,47 @@
+<section class="torqelo-categories color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width">
+    <header class="torqelo-categories__header">
+      {%- if section.settings.eyebrow != blank -%}<p class="torqelo-categories__eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="torqelo-categories__heading {{ section.settings.heading_size }}">{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.text != blank -%}<div class="rte">{{ section.settings.text }}</div>{%- endif -%}
+    </header>
+    <div class="torqelo-categories__grid">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign featured_collection = block.settings.collection
+          assign category_image = block.settings.image | default: featured_collection.image | default: featured_collection.products.first.featured_image
+          assign category_title = block.settings.title | default: featured_collection.title
+          assign category_url = featured_collection.url | default: routes.all_products_collection_url
+          assign category_alt = category_image.alt | default: category_title
+        -%}
+        <a class="torqelo-category" href="{{ category_url }}" {{ block.shopify_attributes }}>
+          <div class="torqelo-category__media">
+            {%- if category_image != blank -%}
+              {{ category_image | image_url: width: 900 | image_tag: widths: '240, 360, 540, 720, 900', sizes: '(min-width: 990px) 25vw, 50vw', loading: 'lazy', alt: category_alt }}
+            {%- else -%}
+              <div class="torqelo-category__placeholder">{{ 'collection-1' | placeholder_svg_tag }}</div>
+            {%- endif -%}
+          </div>
+          <div class="torqelo-category__body"><h3>{{ category_title | escape }}</h3><span class="torqelo-category__link">Shop collection</span></div>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Torqelo category grid",
+  "tag": "section",
+  "max_blocks": 4,
+  "settings": [
+    {"type":"text","id":"eyebrow","label":"Eyebrow","default":"Shop with purpose"},
+    {"type":"inline_richtext","id":"heading","label":"Heading","default":"Explore our collections"},
+    {"type":"select","id":"heading_size","label":"Heading size","options":[{"value":"h2","label":"Medium"},{"value":"h1","label":"Large"}],"default":"h2"},
+    {"type":"richtext","id":"text","label":"Text","default":"<p>A focused selection of useful, beautiful products.</p>"},
+    {"type":"color_scheme","id":"color_scheme","label":"Color scheme","default":"scheme-1"}
+  ],
+  "blocks": [{"type":"category","name":"Category","settings":[{"type":"collection","id":"collection","label":"Collection"},{"type":"image_picker","id":"image","label":"Custom image"},{"type":"text","id":"title","label":"Custom title"}]}],
+  "presets": [{"name":"Torqelo category grid","blocks":[{"type":"category"},{"type":"category"},{"type":"category"},{"type":"category"}]}]
+}
+{% endschema %}
